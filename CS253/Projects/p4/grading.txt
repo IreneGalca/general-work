@@ -1,0 +1,12 @@
+[280]  --- Start grading p4 with ./regressionTestSmashOne ----- Score=100
+[289]  Grading make all Score=100
+[303]  Grading CFLAGS and -Wall Score=100
+[311]  Grading exit command Score=100
+[319]  Grading exit command Score=100
+[328]  Grading cd non-existing-directory Score=100
+[335]  Grading cd existing-directory Score=100
+[342]  Grading basic history functionality using /home/IRENEGALCA/cs253/TestData/test2.in Score=100
+[346]  Grading basic history includes exit status for failed cd command Score=100
+[348]  Grading history of history command Score=100
+[352]  Grading external command:  foo arg1 arg2 arg3 Score=100
+[371]  FinalScore=100  Score=100
