@@ -1,0 +1,132 @@
+****************
+* Project 1/ MagicSquare
+* CS 221- section 2
+* 2/08/2019
+* Irene Galca
+**************** 
+
+OVERVIEW:
+
+ This program creates a magic square with the dimmensions created by the user.
+The numbers in the rows, columns, and diagonal angles should add up to the magic number,
+based on the number the user in puts. 
+For example:
+input: 4		input: 5
+magic sum: 34		magic sum: 65
+
+
+INCLUDED FILES:
+
+ List the files required for the project with a brief
+ explanation of why each is included.
+
+ e.g.
+ * MagicSquareTester- driver file
+ * MagicSquare - source file
+ * README - this file
+
+
+COMPILING AND RUNNING:
+
+ To compile the code, type in the command line:
+$ javac MagicSquareTester.javac
+ ```
+To create your own square in the program, we first need to create a file. To
+do this, type in the command line:
+$ java MagicSquareTester -create Filename.txt _ (<-- you can type any number here)
+E.G.
+
+$ java MagicSquareTester -create MySquare.txt 7
+ e.g.
+
+
+ Run the compiled class file with the command:
+ $ java Class1
+
+ You should then see the number of rows and columns based on your number, and
+each group of integers should add up to your magic sum vertically, horizontally,
+and diagonally.
+
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+One of the first methods that shows up in my code is the readMatrix method.
+(In hindsight this may not have been the best placement.) I wanted the method to
+read the name of the file object, scan it's contents, and show me what the file should
+contain. I decided to make this method a boolean so as it read the file it would
+be able to confirm that the contents of the file existed. This method would also call
+the checkMatrix method to determine if the given values of the file are valid or
+invalid as it's reading them.
+
+I made my check Matrix method a boolean method, because I wanted it to confirm if the given values
+of the magic square would be valid. I set up variables that would represent the
+given size, the row, the column, the sum of the values in the indexes, and the 2D
+array itself.If the sum of the values in the rows did not add up to the valid magic sum,
+I wanted it to confirm that it was false. I also set similar logic to confirm the validity
+for the columns, and the diagonal dimmensions. If the sum of these did not match their
+magic sum, then it would also confirm that these were false making them invalid.
+
+Next I set up a method to create the magic square. I made createMagicSquare a 
+static void method with parameters of size and filename, since we start with a given size and filename.
+We then set up our variables to represent the rows and columns with the updated number
+of indexes based on our given magic number. It then creates the magic square according to 
+the new dimmensions, calls the writeMatrix method to actually write it out in our 
+file.
+
+For the writeMatrix method I used a try/catch block to make sure that if the file wasn't created or
+doesn't exist, then it would catch the excpetion and print out the stack trace to show
+me what's missing. If it has no file, then there's nothing to write the contents to.
+
+Now that it has created the square, checked the square, read the contents, and has written
+the contents of the magic square to the file, we need a method that will print it to show
+us what the file contains. So in my printMatrix method, I passed in the size 
+parameter (of the given magic number), and the actual size of the 2D array in its created
+form.
+
+TESTING:
+
+ I tested the program by runnning the command line in the debugger. It didn't print the square into the
+file as expected at first, but I found out that the issue remained in my initial
+constructor that I started out with. This added some restrictions to the 
+functionality of my code, but once I had eliminated it, and adjusted to code to run without it,
+it ran through the tests without being held back by unnecessary restriction I 
+unintentionally placed in the constructor.
+
+
+DISCUSSION:
+ 
+ My code looked decent before I ran so I had no reason to think it wouldn't run through
+the tests properly. However when I tetsed it, one of the exceptions got caught in the tester
+and it printed my message saying, "Pramaeters don't match!" I ran the debugger to
+find out what this was referring to, and that's where I found the restrictions in 
+my constructor. I instatiated the variables at the top of my MagicSquare class 
+and set up a main constructor that used them. This was essentially was me shooting myself
+in the foot, so to speak, in the sense that I couldn't use the variables however I
+needed to in the methods beyond this. So I ended up having to rewrite some of my 
+variables in each method, when I removed my main constructor.
+
+When I found that that still wasn't working the way I hoped, I ran the debugger on
+my Tester class and found that my args[] statements in my tester class didn't match up 
+with the actual statement indexes of my command line.
+ 
+Due to that, I think there were actually two incredibly challenging things I 
+encountered in this code. One was to actually use variables for each individual method
+instead of instantiating them and using a main constructor like I usually do. I had
+grown so used to using that way of coding that I didn't take into account an alternative
+way of doing things. The other challenge was for me to get used to using the 
+debbugger to find out what was wrong with my tester. After reading the project 
+document a few times I finally found out that I needed to look into my args[] indexes, and
+found that I had accidentally switched args[2] in:
+size = Integer.parseInt(args[2]); 
+
+with args[1] from:
+MagicSquare.readMatrix(args[1]);
+ 
+
+
+----------------------------------------------------------------------------
+
+All content in a README file is expected to be written in clear English with
+proper grammar, spelling, and punctuation. If you are not a strong writer,
+be sure to get someone else to help you with proofreading. Consider all project
+documentation to be professional writing for your boss and/or potential
+customers.
