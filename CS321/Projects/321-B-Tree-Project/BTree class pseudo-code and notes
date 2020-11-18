@@ -1,0 +1,43 @@
+BTree Notes 
+
+***************************************************
+Methods needed:
+
+- SplitChild(currentNode, indexOfChild, fullNode(child)
+- Insert
+- Insert(NonFull)
+    split before insert
+- Search()
+- read()
+- Write()
+
+Split(x, i, y){
+  z=allocate_node(); //Create new node called z
+  leaf[z] = leaf[y]; //set z's leaf variable = y's leaf variable
+  n[z] = t-1; //set the number of keys in z = t-1
+  
+  for j=0 to t-1
+      do key(j)[z] = key(j+1)[y] //set the key at index j in node z = the key at index j+1 in node y
+  
+  if(notLeaf){
+      then for j = 0 to t
+          do C(j)[z] = C(j+1)[y] //set the child at index j in node z = the child at index j+1 in node Y
+  }
+  
+  n[y] = t-1;
+  for j= n[x] + 1 down to i + 1 //Move x's children up 1 index to make room for z
+      do C(j+1)[x] = C(j)[x]
+  
+  C(i+1)[x] = z; //setX's i+1 child = z
+  
+  for j = n[x] down to i //Move x's keys up 1 index to make room for y's middle key
+      do key(j+1) = key(t)[y];
+      
+  key(i)[x] = key(t)[y]; //set the x's ith key = y's middle key
+  n[x]++; //increase numkeys in x by 1
+  Disk_write(y);
+  Disk_write(z);
+  Disk_write(x);
+      
+
+}
