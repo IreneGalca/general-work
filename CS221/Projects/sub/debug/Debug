@@ -1,0 +1,99 @@
+Homework 1: Debugger
+
+@Author Irene Galca
+------------------------------------------------------------
+------------------------------------------------------------
+
+Original test status:
+Passed:32		Failed:25		Skipped:114
+
+1. First failed test I attempted to encounter was in
+my isEmpty method.
+
+java.lang.AssertionError: expected [true] but found [false]
+isEmpty method was set as:
+public boolean isEmpty() {
+		return (rear > 0);
+
+Changed it to:
+public boolean isEmpty() {
+		return (rear == 0);
+//This makes it so that the list is empty only when the index or size of set
+is 0. Not when it's more than 0.
+
+Test status:
+Passed:29		Failed:28		Skipped:114
+---------------------------------------------------------------
+
+2. Second Failed test I attemtped to look into was related to the add
+element method:
+
+java.lang.AssertionError: expected [true] but found [false]
+
+add elememt method was set as:
+public void add(T element) {
+		if (!contains(element)) {
+			if (rear >= setArray.length) {
+				expandCapacity();
+			}
+			setArray[rear] = element;
+		}
+	}
+
+Since setArray[rear]=element was not actually expanding the set as expected.
+I changed it to:
+	public void add(T element) {
+		if (!contains(element)) {
+			if (rear >= setArray.length) {
+				expandCapacity();
+			}
+			setArray[rear++] = element; //increments another index to the set.
+		}
+	}
+
+Test status:
+Passed:72		Failed:6		Skipped:69
+--------------------------------------------------------------------
+
+3. Third failed test I worked on was in my remove method. It was an off-by-1 error.
+
+It was originally set as:
+
+public T remove(T element) {
+		T retVal = null;
+		int i = 0;
+		//locate the element to be removed
+		while (retVal == null && i < rear) {
+			if (setArray[i].equals(element)) {
+				retVal = setArray[i];
+				//shift all following elements one space forward
+				//so there are no gaps in the array
+				while (i < rear) {
+					setArray[i] = setArray[i+1];
+					i++;
+				}
+			}
+			i++;
+		}
+		if (retVal == null) {
+			throw new NoSuchElementException("ArraySet");
+		}
+		rear--;
+		return retVal;
+	}
+
+I noticed that the condition (i<rear) would include an extra index in the set that may not exist, so I changed it to:
+while (i < rear-1)
+
+Test status:
+Passed:111		Failed:0		Skipped:0
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
