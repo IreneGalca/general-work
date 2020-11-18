@@ -1,0 +1,20 @@
+[300]  --- Start grading p6_redo with ./testSmashTwo ----- Score=100
+[312]  Grading make all Score=100
+[326]  Grading CFLAGS and -Wall Score=100
+[330]  Grading CFLAGS and -std=c99 Score=100
+[338]  Grading exit command Score=100
+[346]  Grading exit command with a blank line Score=100
+[355]  Grading cd non-existing-directory Score=100
+[362]  Grading cd existing-directory Score=100
+[369]  Grading basic history functionality using /home/IRENEGALCA/cs253/TestData/test2.in Score=100
+[372]  ERROR:  Could not grep 2.*cd *foo in /tmp/irenegalca250946 Score=95
+[373]  Grading basic history includes exit status for failed cd command Score=95
+[375]  Grading history of history command Score=95
+[379]  Grading long (>10 commands) history using /home/IRENEGALCA/cs253/TestData/test3.in Score=95
+[382]  ERROR:  Could not grep 11.*theLastLsCommand in /tmp/irenegalca250946 Score=90
+[388]  Grading execution of a simple, external command Score=90
+[399]  Grading the cd command changes smash current working directory Score=90
+[410]  Grading exit status of external command recorded in history Score=90
+[416]  Grading buffer overflow attack Score=90
+[426]  Running valgrind smash Score=90
+[441]  FinalScore=90  Score=90
