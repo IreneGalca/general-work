@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-image: url("../imgs/wave.png"); /*I drew up a quick asset for this.*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: 300;
+}
+
+#text_span {
+    color: ghostwhite;
+    font-weight: 200;
+}
+
+.gif {
+    background-image: url("http://forgifs.com/gallery/d/286213-2/Hermit-crab-perfect-fit-sea-shell.gif");
+    height: 200px;
+    width: 200px;
+    border-radius: 200px;
+    margin: 10px auto;
+    background-size: cover;
+}
+
+/*************************************
+        nav bar
+**************************************/
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background: #00a2a9;
+}
+
+    header::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+.logo {
+    float: left;
+    padding: 10px 0;
+}
+
+nav {
+    position: center ;
+}
+
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    nav li {
+        display: inline-block;
+        margin-left: 70px;
+        padding-top: 23px;
+        position: relative;
+    }
+
+    nav a {
+        color: #444;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+        nav a:hover {
+            color: #000;
+        }
+
+        nav a::before {
+            content: '';
+            display: block;
+            height: 5px;
+            background-color: #444;
+            position: absolute;
+            top: 0;
+            width: 0%;
+            transition: all ease-in-out 250ms;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+/********************************************
+            post button padding
+********************************************/
+
+.text_pad {
+    text-align: center;
+    color: ghostwhite;
+    text-decoration: underline double;
+    text-decoration-thickness: 2px;
+}
+
+.ask_con {
+    text-align: center;
+}
+
+.basic_ask {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5% 5%;
+}
+
+
+#btn {
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 90px;
+    
+}
+
+btn:hover {
+    background-color: lightseagreen;
+}
+
+/*************************************
+            Scroll bar style
+**************************************/
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid #055d5e;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #055d5e;
+    border-radius: 10px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #88ba1c;
+    }
+
+/**************************************************
+            Table
+***************************************************/
+table{
+    margin-left: 30px;
+    width: 90%;
+    float:left;
+}
+
+.th1{
+    width: 70em;
+    background-color: #00a2a9;
+}
+
+.th2{
+    width: 30em;
+    background-color: #00a2a9;
+}
+
+tr{
+    background-color: white;
+}
+
+/*************************************
+    Footer
+**************************************/
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* Height of the footer*/
+    height: 40px;
+    background: #00a2a9;
+}
+
+h4{
+    
+    color: rgb(255, 100, 100);
+}
+
+.p-span{
+    color: rgb(255, 100, 100);
+
+}
+
+a{
+    color: rgb(89, 205, 255);
+}

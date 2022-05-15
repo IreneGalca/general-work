@@ -1,0 +1,36 @@
+form{
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+label{
+    font-size: 40px;
+    color: aliceblue;
+}
+
+input{
+    padding: 10px;
+    height: 30px;
+    border-radius: 20px;
+    border:none;
+}
+
+textarea{
+    padding: 20px;
+    margin-top: 20px;
+    width: 65%;
+    height: 50%;
+    border-radius: 20px;
+    border: none;
+    resize: none;
+}
+
+.btn{
+    margin-top: 20px;
+    font-size: 20;
+    height: 40px;
+    width: 70px;
+}
+    .btn:hover{
+        background-color: lightsteelblue;
+    }
