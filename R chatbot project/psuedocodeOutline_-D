@@ -1,0 +1,45 @@
+#delegate tasks:
+  #1) Create file parser:
+  #2) Create review object:
+  #2) Create dictionary object:
+  #3) Create probability calculations:
+
+#1 import the file 
+#2 create a review object
+#   !Review object should have a total word count, original score and predicted score. Predicted score will be empy for first half of the data that is doing the training. 
+#3 create a dictionary object that stores a word count, average star score 
+#4 for each line in review doc, create a review object
+#   !!!! at this point we only want to operate on the 1st half of the reviews, leave the last half for testing.
+#5 for each word in each review,  add it to the dictionary 
+#6 do the probablility calculations, store each estimated probability from most likely to least likely for each review.
+
+
+
+
+#this is an s4 object, it may not be the best object type out there, its just to give you an idea of what the structure should be
+setClass("Review", slots=list(wordCount="numeric", originalScore="numeric", predictedScore="numeric", reviewText="list"))
+setClass("Word", slots=list(wordText="character", wordCount="numeric", wordScore="numeric"))
+listOfWordObjects <- list()#this will hold each word object, not sure if this is the best way to do this
+word1 <- new("Word", wordCount=1, wordScore=2)#this is just an example, comment out 
+listOfWordObjects[[4]] <- word1#this is just an example, comment out
+#import file
+#for line in file, create new review class
+#for word in review, add it to listOfWordObjects or modify it if it already exists
+
+
+
+#tackle this part after spring break:
+  #for the 2nd half of the reviews, for each word look up the word's probability score from the dictionary and add that to the predeicted score for the review
+  #compare the predicted score to the actual score and calculate difference
+
+
+
+
+
+
+
+
+
+
+
+

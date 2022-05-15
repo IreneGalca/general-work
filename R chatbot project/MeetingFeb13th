@@ -1,0 +1,14 @@
+1) Convert HTML to CSV
+2) Remove Agent unique names so that every name is just "Agent"
+3) Put all 
+3) Use TensorFlow for R to:
+4) Split data (50/50)
+5) Find the most popular 10,000 words and vectorize
+6) Vecotrize the more unique words
+
+
+
+Explore the Data: Irene
+Prepare the Data: Sajja
+Build the Model: Adri
+Train the Model: Brielle

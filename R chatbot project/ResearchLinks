@@ -1,0 +1,16 @@
+Training the model:
+  How training works: https://towardsdatascience.com/machine-learning-general-process-8f1b510bd8af
+  Basics: https://ai.stackexchange.com/questions/14001/what-is-the-thing-which-is-trained-in-ai-model-training
+  Thorough outline of training in R (with pictures as examples): https://www.datacamp.com/community/tutorials/machine-learning-in-r
+  Training w/ Keras/Tensorflow: https://towardsdatascience.com/how-to-implement-deep-learning-in-r-using-keras-and-tensorflow-82d135ae4889
+  
+  
+  
+  
+  Brielle's Unclassified Section (Will organize soon):
+  https://analyticsanddatasummit.org/wp-content/uploads/2016/12/F1852609100_20170202_Chafi-Hornick_-_Combining_Graph_and_ML_Tech_using_R_-_v10.pdf
+  https://towardsdatascience.com/graph-theory-and-deep-learning-know-hows-6556b0e9891b
+  https://medium.com/octavian-ai/how-to-get-started-with-machine-learning-on-graphs-7f0795c83763
+  https://pathmind.com/wiki/graph-analysis
+  https://www-cs.stanford.edu/people/jure/pubs/graphrepresentation-ieee17.pdf
+  https://people.cs.umass.edu/~mccallum/courses/gm2011/02-bn-rep.pdf

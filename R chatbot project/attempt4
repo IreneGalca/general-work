@@ -1,0 +1,114 @@
+    #install.packages("e1071", dep = TRUE)
+    #install.packages("tm")
+    #install.packages("gmodels")
+    #install.packages("SnowballC")
+    #install.packages("wordcloud")
+    #install.packages("broom")
+    #install.packages("quanteda")
+    #install.packages("tidytext")
+    #install.packages("hash")
+  library(quanteda)
+  library(tm)
+  library(SnowballC)
+  library(e1071)
+  library(gmodels)
+  library(dplyr)
+  library(stringr)
+  library(wordcloud)
+  library(broom)
+  library(tidytext)
+  library(hash)
+  library()
+  sms_raw <- read.csv("~/Documents/My2020/CS354/finalProject/7282_1.csv", stringsAsFactors = FALSE)
+  
+  #data preprocessing--------------------
+  sms_raw$reviews.rating <- factor(sms_raw$reviews.rating)
+  str(sms_raw$reviews.rating)
+  sms_stars <- factor(sms_raw$reviews.rating)
+  dataframe <- dataframe[, reviews.text := tolower(reviews.text)]
+  dataframe <- dataframe[, reviews.text := removeNumbers(reviews.text)]
+  dataframe <- dataframe[, reviews.text := removePunctuation(reviews.text)]
+  dataframe <- dataframe[, reviews.text := stemDocument(reviews.text)]
+  dataframe <- dataframe[, reviews.text := stripWhitespace(reviews.text)]
+  
+  #split the data up for testing
+  sms_dtm_train <- dataframe[1:580, ]#[1:14364, ]#
+  sms_dtm_test <- dataframe[581:725, ]#[14365:17956, ]
+  sms_train_labels <- sms_raw[1:580, ]$reviews.rating##[1:14364, ]
+  sms_test_labels <- sms_raw[581:725, ]$reviews.rating#[14365:17956, ]
+  
+  starProb <- function(int) {#returns probability of a given star occuring 
+    starProbTable <- sms_train_labels %>%#create a table that has the proportions of each rating 
+      table %>%
+      prop.table
+    starProbTable[[int+1]]
+  }
+  
+  all_words <- unlist(regmatches(sms_dtm_train$reviews.text,  gregexpr('\\w+', sms_dtm_train$reviews.text))) # flattten word list from individual strings into one vector
+  freq_count <- table(all_words)# count frequencies
+  
+  wordCountNew <- function(String) {#find probability that a word will occur with a given star rating
+    wordOccurances <- freq_count[String]
+    if(is.na(wordOccurances)){#if word is not found, return smoother
+      return(.00001)
+    }
+    wordOccurances <- wordOccurances/sum(freq_count)#number of times word occurs in review divided by number of words in review
+    return(wordOccurances[[1]])
+  }
+  #wordProb("with")#returns probability of the word "was" occuring in total
+  wordWithStarProb <- function(String, int) {#find probability that a word will occur with a given star rating
+    filteredReviews <- sms_dtm_train[reviews.rating==int]#filter for just reviews of given star prob
+    all_words <- unlist( # flattten word list from individual strings into one vector
+      regmatches(filteredReviews$reviews.text,  gregexpr('\\w+', filteredReviews$reviews.text))) # extract all words
+    freq_count <- table(all_words)# count frequencies
+    wordOccurances <- freq_count[String]
+    if(is.na(wordOccurances)){#if word is not found, return smoother
+      return(.00001)
+    }
+    wordOccurances <- wordOccurances/sum(freq_count)#number of times word occurs in review divided by number of words in review
+    return(wordOccurances[[1]])
+  }
+  #example <- wordWithStarProb("a", 2)#expected .0316455 this is the probability that a given word will occur for a given review.
+   
+  #Bayes Rule
+  Ptw <- function(String, int){
+    return(wordWithStarProb(String, int)*starProb(int)/wordCountNew(String))
+  }
+  Ptw("was", 3)#Expected: .01206554
+  
+  Pe <- function(E){
+    scores <- list(0,0,0,0,0,0)
+    N <- strsplit(E, " ")
+    for(i in 1:6){
+      for(word in N[[1]]){
+        ptw <- Ptw(word, i-1)
+        #print(ptw)
+        if(scores[[i]] == 0){
+          scores[i] <- ptw[[1]]
+        }
+        else{
+          scores[i] <- scores[[i]] * ptw[[1]]
+        }
+      }
+    }
+    return(which.max(scores))
+  }
+  
+  #Pe("was")
+  predictions <- list()
+  accuracy <- 0
+  for(i in 1:as.integer(count(sms_dtm_test))){
+    vari <- Pe(sms_dtm_test$reviews.text[i])-1
+    predictions[i] <-vari
+    accuracy <- accuracy + (vari == as.integer(sms_dtm_test$reviews.rating[i]))
+  }
+  accuracy <- accuracy/(as.integer(count(sms_dtm_test)))
+  print(accuracy)
+  
+  
+  
+  
+  
+  
+  
+  

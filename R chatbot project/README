@@ -1,0 +1,13 @@
+README
+
+To run this text follow these steps:
+1) Download the attached R and .csv file.
+  Note: the original data can be found at https://www.kaggle.com/datafiniti/hotel-reviews. We removed excess rows and columns from this dataset as well as randomized the reviews to ensure an even mixture between tests and training sets. Neither of these steps are required to run this program. 
+2) Change the .csv file path on line 22 to the location of the review data file.
+  
+  E.g. sms_raw <- read.csv("current-directory-of-your-csv", stringsAsFactors = FALSE)
+  
+3) Uncomment and install any of the packages listed at the top of the file that are not already installed. 
+4) Run the R file. If you are working in RStudio you can do this by selecting source at the top right corner.
+4) The program will take several minutes to complete. 
+

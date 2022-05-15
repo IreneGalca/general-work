@@ -1,0 +1,135 @@
+#install.packages("e1071", dep = TRUE)
+#install.packages("tm")
+#install.packages("gmodels")
+#install.packages("SnowballC")
+#install.packages("wordcloud")
+install.packages("broom")
+install.packages("tidytext")
+library(tm)
+library(SnowballC)
+library(e1071)
+library(gmodels)
+library(dplyr)
+library(stringr)
+library(wordcloud)
+library(broom)
+library(tidytext)
+#!!!!!!!!!!!!!!!!!!!!!!!Change this line to your file path of the CSV!!!!!!!!!!!!!
+sms_raw <- read.csv("~/Documents/My2020/CS354/finalProject/7282_1.csv", stringsAsFactors = FALSE)
+#^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+str(sms_raw)
+
+sms_raw$reviews.rating <- factor(sms_raw$reviews.rating)
+str(sms_raw$reviews.rating) #Success!
+sms_corpus <- VCorpus(VectorSource(sms_raw$reviews.text))
+typeof(sms_corpus) # Just to show that it is a list
+print(sms_corpus)
+length(sms_corpus) %>%
+  sample(replace = FALSE) %>%
+  sort.list(decreasing = FALSE) %>% 
+  head(2) %>%
+  sms_corpus[.] %>%
+  inspect()
+sms_corpus_clean <- sms_corpus %>%
+  tm_map(content_transformer(tolower)) %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removeWords, stopwords()) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stemDocument) %>%
+  tm_map(stripWhitespace)
+
+sms_dtm <- DocumentTermMatrix(sms_corpus_clean)
+sms_dtm_train <- sms_dtm[1:20, ]#[1:14364, ]
+sms_dtm_test <- sms_dtm[21:40, ]#[14365:17956, ]
+sms_train_labels <- sms_raw[1:20, ]$reviews.rating##[1:14364, ]
+sms_test_labels <- sms_raw[21:40, ]$reviews.rating#[14365:17956, ]
+
+sms_train_labels %>%
+  table %>%
+  prop.table
+sms_test_labels %>%
+  table %>%
+  prop.table
+#sms_train_labels this is a list of all the star values for the reviews
+sms_dtm_freq_train <- sms_dtm_train %>%
+  findFreqTerms(5) %>%
+  sms_dtm_train[ , .]
+sms_dtm_freq_test <- sms_dtm_test %>%
+  findFreqTerms(5) %>%
+  sms_dtm_test[ , .]
+print(sms_dtm_freq_train)
+convert_counts <- function(x) {
+  x <- ifelse(x > 0, "Yes", "No")
+}
+
+sms_train <- sms_dtm_freq_train %>%
+  apply(MARGIN = 2, convert_counts)
+sms_test <- sms_dtm_freq_test %>%
+  apply(MARGIN = 2, convert_counts)
+#--------------------------------------------------------------
+  
+#sms_classifier <- naiveBayes(sms_train, sms_train_labels)
+print(sms_train)
+terms<-Terms(sms_dtm_freq_train)
+head(terms)
+terms
+sum(wordOccur[3])
+wordOccur <- tidy(sms_dtm_freq_train)#P_T_estimate CountEachWordOccur = count(sms_train)//count occurances of a word in all training data
+typeof(wordOccur)
+view(wordOccur)
+wordOccur
+sum <- wordOccur(sum(count))
+print(wordOccur[2]=="room")
+print(wordOccur["stay",3])
+print(wordOccur(1))
+count <- count(wordOccur, "hotel")
+count[2]
+grep("room", wordOccur(term))
+length(wordOccur)
+
+starProb <- function(String) {#this is Pw(w) function in Python line 35
+  count <- count(wordOccur, toString(String))
+  total <- sum(wordOccur[3])
+  prob <- (count[2]/total)
+  return(prob)
+}
+wordProb("hotel")
+
+
+
+
+
+
+
+
+
+
+wordProb <- function(String) {#this is Pw(w) function in Python line 35
+  count <- count(wordOccur, toString(String))
+  if(count == 0){
+    return(.00001)
+  }
+  total <- sum(wordOccur[3])
+  prob <- (count[2]/total)
+  return(prob)
+}
+wordProb("hotel")
+
+
+#dataset <- table(sms_train)#
+#print(dataset)
+#dataset[names(dataset)=="nice"]#see count of specifc word
+#TotalWordCount = len(sms_train)//count totla number of words
+#def Pt(T):
+#  return p_t_estimate[T] / p_t_total//probability of a word occuring.
+#words = [w for s in train for w is s]
+
+
+#--------------------------------------------------------
+sms_pred <- predict(sms_classifier, sms_test)
+
+ct <- CrossTable(sms_pred, sms_test_labels, prop.chisq = FALSE, chisq = FALSE, 
+           prop.t = FALSE,
+           dnn = c("Predicted", "Actual"))
+
+write.csv(ct,"ct.csv")
