@@ -1,0 +1,167 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Nova+Cut&family=Syne+Mono&display=swap');
+
+html {
+    height: 100%;
+    font-family: 'Cinzel', serif;
+}
+
+body {
+    height: 100%;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: linear-gradient(rgba(32 32 34),rgb(29 16 39));
+}
+
+/***************************************
+Nav bar
+****************************************/
+header {
+    background-color: rebeccapurple;
+    position: fixed;
+    display: flex;
+    padding-top: 20px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    align-items: center;
+}
+
+header * {
+    display: inline;
+}
+
+header li {
+    margin: 20px;
+}
+
+header a {
+    color: ghostwhite;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+    header a:hover {
+        color: lightslategrey;
+    }
+
+header img {
+    margin-left: 40px;
+    height: 80px;
+}
+
+button {
+    float: right;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+}
+
+    button:hover {
+        font-family: 'Cinzel', serif;
+        background-color: #ccaae4;
+    }
+    /*********************************************************/
+
+.v-menu-right {
+    position: fixed;
+    display: flex;
+    right: 0;
+    margin-top: 15%;
+    background-color: #2e2837;
+    height: auto;
+    width: 30px;
+    padding-right: 40px;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    align-items:center;
+}
+
+    .v-menu-right a {
+        color: ghostwhite;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 50px;
+        line-height: 3em;
+    }
+
+    .v-menu-right a:hover{
+        color: lightslategrey;
+    }
+    /****************************************/
+
+
+.journal {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+    margin-bottom: 60px;
+}
+
+.img-book {
+    width: 90%;
+}
+
+.test {
+    font-family: 'Cinzel', serif;
+    /*background-color: mediumpurple;*/
+    width: 75%;
+    height: 65%;
+    position: absolute;
+    margin-top: 70px;
+    margin-bottom: 60px;
+    justify-content: center;
+    opacity: 0.8;
+    padding: 30px;
+}
+
+#title {
+    font-family: 'Cinzel', serif;
+    background-color: transparent;
+    border: none;
+    font-size: 40px;
+    font-weight: 600;
+    text-decoration: underline #333333;
+}
+
+#desc-1 {
+    font-family: 'Cinzel', serif;
+    background: transparent;
+    border: none;
+    resize: none;
+    width: 40%;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #333333;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #333333;
+    opacity: 1;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #333333;
+    opacity: 1;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #333333;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #333333;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color: #333333;
+}
